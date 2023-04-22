@@ -20,7 +20,9 @@ namespace WebServerFinal.Models
         [Required(ErrorMessage = "Please enter the genre of the book.")] 
         public int GenreID { get; set; }
         public Genres Genres { get; set; }
-        public int? UserID { get; set; } // Allows nulls since a book may not be checked out
-        public Users Users { get; set; }
+
+        // FK allows nulls since a book may not be checked out
+        public int? UserID { get; set; } 
+        public Users? Users { get; set; }
     }
 }

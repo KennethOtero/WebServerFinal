@@ -17,7 +17,8 @@ namespace WebServerFinal.Models
             modelBuilder.Entity<Genres>(entity =>
             {
                 // Disallow nulls
-                entity.Property(e => e.GenreID).IsRequired();
+                entity.HasKey(e => e.GenreID);
+                entity.Property(e => e.GenreID).ValueGeneratedOnAdd();
                 entity.Property(e => e.Genre).IsRequired();
 
                 // Seeded data
@@ -42,7 +43,8 @@ namespace WebServerFinal.Models
             modelBuilder.Entity<Users>(entity =>
             {
                 // Disallow nulls
-                entity.Property(e => e.UserID).IsRequired();
+                entity.HasKey(e => e.UserID);
+                entity.Property(e => e.UserID).ValueGeneratedOnAdd();
                 entity.Property(e => e.Name).IsRequired();
                 entity.Property(e => e.Email).IsRequired();
                 entity.Property(e => e.Password).IsRequired();
@@ -75,11 +77,17 @@ namespace WebServerFinal.Models
             modelBuilder.Entity<Books>(entity =>
             {
                 // Disallow nulls
-                entity.Property(e => e.BookID).IsRequired();
+                entity.HasKey(e => e.BookID);
+                entity.Property(e => e.BookID).ValueGeneratedOnAdd();
                 entity.Property(e => e.Title).IsRequired();
                 entity.Property(e => e.Author).IsRequired();
                 entity.Property(e => e.IsRented).IsRequired();
-                entity.Property(e => e.GenreID).IsRequired();
+                entity.HasOne<Genres>(b => b.Genres)
+                    .WithMany(g => g.Books)
+                    .HasForeignKey(b => b.GenreID);
+                entity.HasOne<Users>(b => b.Users)
+                    .WithOne(u => (Books)u.Books)
+                    .HasForeignKey<Books>(b => b.UserID);
 
                 // Seeded data
                 entity.HasData(new Books
