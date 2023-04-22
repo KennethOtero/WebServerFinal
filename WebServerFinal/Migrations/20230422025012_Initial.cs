@@ -95,7 +95,7 @@ namespace WebServerFinal.Migrations
                 {
                     { 1, "James S. A. Corey", 1, true, "Leviathan Wakes", 1 },
                     { 2, "James S. A. Corey", 1, false, "Leviathan Falls", null },
-                    { 3, "James S. A. Corey", 1, false, "Caliban's War", 1 }
+                    { 3, "James S. A. Corey", 1, false, "Caliban's War", null }
                 });
 
             migrationBuilder.CreateIndex(

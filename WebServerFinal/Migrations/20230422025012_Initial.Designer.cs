@@ -12,7 +12,7 @@ using WebServerFinal.Models;
 namespace WebServerFinal.Migrations
 {
     [DbContext(typeof(BooksDBContext))]
-    [Migration("20230422023913_Initial")]
+    [Migration("20230422025012_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -82,8 +82,7 @@ namespace WebServerFinal.Migrations
                             Author = "James S. A. Corey",
                             GenreID = 1,
                             IsRented = false,
-                            Title = "Caliban's War",
-                            UserID = 1
+                            Title = "Caliban's War"
                         });
                 });
 

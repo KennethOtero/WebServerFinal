@@ -115,7 +115,7 @@ namespace WebServerFinal.Models
                     Author = "James S. A. Corey",
                     IsRented = false,
                     GenreID = 1,
-                    UserID = 1
+                    UserID = null
                 });
             });
         }

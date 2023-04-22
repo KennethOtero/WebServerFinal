@@ -79,8 +79,7 @@ namespace WebServerFinal.Migrations
                             Author = "James S. A. Corey",
                             GenreID = 1,
                             IsRented = false,
-                            Title = "Caliban's War",
-                            UserID = 1
+                            Title = "Caliban's War"
                         });
                 });
 
