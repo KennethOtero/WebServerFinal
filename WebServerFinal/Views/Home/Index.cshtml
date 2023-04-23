@@ -1,9 +1,14 @@
-﻿@{
+﻿@using WebServerFinal.Models
+@model IEnumerable<Books>
+@{
     ViewData["Title"] = "Homepage";
 }
 
 <div class="text-center">
     <h1 class="display-5">All Books</h1>
+
+    <a asp-action="Add" asp-controller="Book" class="btn btn-dark mr-2">Add Book</a>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -14,14 +19,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Leviathan Wakes</t>
-                <td>James S. A. Corey</td>
-                <td>Science Fiction</td>
-                <td>
-                    <a class="" asp-controller="" asp-action="">Check Out</a>
-                </td>
-            </tr>
+            @foreach (Books c in Model)
+            {
+                <tr>
+                    <td>@c.Title</td>
+                    <td>@c.Author</td>
+                    <td>@c.Genres</td>
+                    <td>
+                        <a class="" asp-controller="" asp-action="">Check Out</a>
+                        <a asp-action="Delete" asp-controller="Book" asp-route-id="@c.BookID"
+                       class="btn btn-outline-dark">Delete</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

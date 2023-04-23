@@ -1,0 +1,21 @@
+﻿@using WebServerFinal.Models
+@model Books
+@{
+    ViewData["Title"] = "Delete Class";
+}
+
+<h2 class="p-2">Delete Book</h2>
+<ul class="list-group mb-2">
+    <li class="list-group-item">
+        <h4>@Model?.Title @Model?.Author</h4>
+    </li>
+    <li class="list-group-item">
+        Genre: @Model?.Genres.Genre
+    </li>
+</ul>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="BookID" />
+    <button type="submit" class="btn btn-dark">Delete</button>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-outline-dark">Cancel</a>
+</form>

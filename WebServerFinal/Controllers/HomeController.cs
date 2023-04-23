@@ -1,17 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebServerFinal.Models;
+using WebServerFinal.Models.DataLayer;
 
 namespace WebServerFinal.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private Repository<Books> books { get; set; }
+
+        public HomeController(BooksDBContext ctx)
         {
-            return View();
+            books = new Repository<Books>(ctx);
         }
 
-        public IActionResult About()
+        public ViewResult Index(int id)
         {
-            return View();
+            var bookOptions = new QueryOptions<Books>
+            {
+                Includes = "Genres"
+            };
+            if (id == 0)
+            {
+                bookOptions.OrderBy = c => c.BookID;
+            }
+            else
+            {
+                bookOptions.Where = c => c.BookID == id;
+            }
+
+            var booklist = books.List(bookOptions);
+
+            ViewBag.Id = id;
+            return View(booklist);
         }
+
     }
 }
