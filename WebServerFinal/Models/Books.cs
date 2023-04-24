@@ -19,7 +19,7 @@ namespace WebServerFinal.Models
         // Foreign keys and their navigation properties
         [Required(ErrorMessage = "Please enter the genre of the book.")] 
         public int GenreID { get; set; }
-        public Genres Genres { get; set; }
+        public Genres? Genres { get; set; }
 
         // FK allows nulls since a book may not be checked out
         public int? UserID { get; set; } 

@@ -34,5 +34,11 @@ namespace WebServerFinal.Controllers
             return View(booklist);
         }
 
+        public IActionResult About()
+        {
+            // Display about page
+            return View();
+        }
+
     }
 }
