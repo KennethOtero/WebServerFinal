@@ -24,7 +24,13 @@
                 <tr>
                     <td>@c.Title</td>
                     <td>@c.Author</td>
-                    <td>@c.Genres</td>
+                    <td>
+                        @if(c.Genres != null)
+                        {
+                            // Display genre name
+                            @c.Genres.Genre
+                        }
+                    </td>
                     <td>
                         <a class="" asp-controller="" asp-action="">Check Out</a>
                         <a asp-action="Delete" asp-controller="Book" asp-route-id="@c.BookID"
