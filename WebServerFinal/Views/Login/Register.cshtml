@@ -1,30 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using WebServerFinal.Models
+@model Users
 @{
     ViewData["Title"] = "Register";
 }
 
 <div class="w-50 p-3 mx-auto">
-    <form method="post">
+    <form asp-action="Register" method="post">
         <h3 class="display-5 text-center">Create an Account</h3>
         <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-outline mb-4">
-            <label class="form-label" for="form2Example1">Name</label>
-            <input type="text" id="name" class="form-control" />
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control" type="text" />
         </div>
         <div class="form-outline mb-4">
-            <label class="form-label" for="form2Example1">Email address</label>
-            <input type="email" id="email" class="form-control" />
+            <label asp-for="Email" class="form-label">Email address</label>
+            <input asp-for="Email" type="email" class="form-control" />
         </div>
         <div class="form-outline mb-4">
-            <label class="form-label" for="form2Example2">Create Password</label>
-            <input type="password" id="password" class="form-control" />
+            <label asp-for="Password" class="form-label">Create Password</label>
+            <input asp-for="Password" type="password" class="form-control" />
         </div>
         <div class="form-outline mb-4">
-            <label class="form-label" for="form2Example2">Confirm Password</label>
-            <input type="password" id="confirmPassword" class="form-control" />
+            <label class="form-label">Confirm Password</label>
+            <input name="confirmPassword" type="password" class="form-control" />
         </div>
-        <button type="button" class="btn btn-primary btn-block mb-4 w-100">Create Account</button>
+        <button type="submit" class="btn btn-primary btn-block mb-4 w-100">Create Account</button>
+
+        <!--Hidden fields-->
+        <input type="hidden" asp-for="Books" />
     </form>
 </div>
