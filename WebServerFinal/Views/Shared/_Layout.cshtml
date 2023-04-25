@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor myHttpContext;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,7 +32,14 @@
                 </div>
                <div class="navbar-nav navbar-right">
                    <!-- Check login status to change to "Profile" from "Sign In" -->
-                   <a class="nav-item nav-link text-dark" asp-controller="Login" asp-action="Index">Sign In</a>
+                    @if (myHttpContext.HttpContext.Session.GetString("UserID") != null)
+                    {
+                        <a class="nav-item nav-link text-dark" asp-controller="Login" asp-action="LogOut">Sign Out</a>
+                    }
+                    else
+                    {
+                        <a class="nav-item nav-link text-dark" asp-controller="Login" asp-action="Index">Sign In</a>
+                    }
                </div>
             </div>
         </nav>

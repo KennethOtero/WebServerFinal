@@ -2,19 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using WebServerFinal.Models;
 using WebServerFinal.Models.DataLayer;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace WebServerFinal.Controllers
 {
     public class LoginController : Controller
     {
         private BooksDBContext context;
+        private readonly IHttpContextAccessor myHttpContext;
         private Repository<Users> Users { get; set; }
 
-        public LoginController(BooksDBContext ctx)
+        public LoginController(BooksDBContext ctx, IHttpContextAccessor httpContextAccessor)
         {
             Users = new Repository<Users>(ctx);
             context = ctx;
+            myHttpContext = httpContextAccessor;
         }
 
         public IActionResult Index()
@@ -84,9 +85,21 @@ namespace WebServerFinal.Controllers
             }
         }
 
-        public IActionResult LogOut()
+        [HttpGet]
+        public ViewResult LogOut()
         {
             return View();
+        }
+        
+        [HttpPost]
+        public IActionResult LogOutAction()
+        {
+            // Remove session
+            HttpContext.Session.Clear();
+            HttpContext.Session.Remove("UserId");
+
+            // Go to homepage
+            return RedirectToAction("Index", "Home");
         }
     }
 }
