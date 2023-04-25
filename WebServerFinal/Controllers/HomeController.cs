@@ -40,5 +40,23 @@ namespace WebServerFinal.Controllers
             return View();
         }
 
+        // Display individual team pages
+        public IActionResult Chang()
+        {
+            return View();
+        }
+        public IActionResult Tara()
+        {
+            return View();
+        }
+        public IActionResult Tigran()
+        {
+            return View();
+        }
+        public IActionResult Kenneth()
+        {
+            return View();
+        }
+
     }
 }
