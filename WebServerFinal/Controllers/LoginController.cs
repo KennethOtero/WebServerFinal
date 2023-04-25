@@ -59,6 +59,13 @@ namespace WebServerFinal.Controllers
                 ModelState.AddModelError("Password", "Passwords do not match.");
             }
 
+            // Check if email already exists
+            var emailExists = context.Users.FromSqlRaw($"SELECT * FROM dbo.Users WHERE Email = '{user.Email}'").ToList();
+            if (emailExists.Count > 0)
+            {
+                ModelState.AddModelError("Email", "Email already exists.");
+            }
+
             bool isAdd = user.UserID == 0;
 
             if (ModelState.IsValid)
