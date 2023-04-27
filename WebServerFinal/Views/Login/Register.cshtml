@@ -11,19 +11,19 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-outline mb-4">
             <label asp-for="Name" class="form-label">Name</label>
-            <input asp-for="Name" class="form-control" type="text" />
+            <input asp-for="Name" class="form-control" type="text" required/>
         </div>
         <div class="form-outline mb-4">
             <label asp-for="Email" class="form-label">Email address</label>
-            <input asp-for="Email" type="email" class="form-control" />
+            <input asp-for="Email" type="email" class="form-control" required/>
         </div>
         <div class="form-outline mb-4">
             <label asp-for="Password" class="form-label">Create Password</label>
-            <input asp-for="Password" type="password" class="form-control" />
+            <input asp-for="Password" type="password" class="form-control" required/>
         </div>
         <div class="form-outline mb-4">
             <label class="form-label">Confirm Password</label>
-            <input name="confirmPassword" type="password" class="form-control" />
+            <input name="confirmPassword" type="password" class="form-control" required/>
         </div>
         <button type="submit" class="btn btn-primary btn-block mb-4 w-100">Create Account</button>
 
