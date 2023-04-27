@@ -7,7 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 // Database service
-builder.Services.AddDbContext<BooksDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BooksDBContext")));
+builder.Services.AddDbContext<BooksDBContext>(options => 
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("BooksDBContext")));
 
 // Session service
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

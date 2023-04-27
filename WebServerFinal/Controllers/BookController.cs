@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebServerFinal.Models;
 using WebServerFinal.Models.DataLayer;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace WebServerFinal.Controllers
 {
@@ -11,10 +12,13 @@ namespace WebServerFinal.Controllers
 
         private Repository<Genres> genres { get; set; }
 
+        private BooksDBContext context { get; set; }
+
         public BookController(BooksDBContext ctx)
         {
             books = new Repository<Books>(ctx);
             genres = new Repository<Genres>(ctx);
+            context = ctx;
         }
 
         public RedirectToActionResult Index() => RedirectToAction("Index","Home");
@@ -62,7 +66,36 @@ namespace WebServerFinal.Controllers
             books.Save();
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Action = "Edit";
+            ViewBag.Genres = context.Genres.OrderBy(g => g.Genre).ToList();
+            var c = context.Books.Find(id);
+            return View(c);
+        }
 
+        [HttpPost]
+        public IActionResult Edit(Books c)
+        {
+           
+
+            if (ModelState.IsValid)
+            {
+                if (c.BookID == 0)
+                    books.Insert(c);
+                else
+                    books.Update(c);
+                    books.Save();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.Action = (c.BookID == 0) ? "Add" : "Edit";
+                ViewBag.Genres = context.Genres.OrderBy(g => g.Genre).ToList();
+                return View(c);
+            }
+        }
         private Books GetBook(int id)
         {
             var classOptions = new QueryOptions<Books>
@@ -72,14 +105,16 @@ namespace WebServerFinal.Controllers
             };
             return books.Get(classOptions) ?? new Books();
         }
-
-        private void LoadViewBag(string operation)
-        {
-            ViewBag.Genres = genres.List(new QueryOptions<Genres>
+        
+            private void LoadViewBag(string operation)
+            {
+                ViewBag.Genres = genres.List(new QueryOptions<Genres>
             {
                 OrderBy = g => g.GenreID
             });
-            ViewBag.Operation = operation;
-        }
+                ViewBag.Operation = operation;
+            }
+        
     }
 }
+
